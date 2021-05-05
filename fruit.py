@@ -1,11 +1,11 @@
 import pygame
 import random
 
+
 class Fruit:
     def __init__(self, width, height, display, snake):
         self.r = 10
         self.display = display
-        self.color = (0, 127,0)
         self.width = width
         self.height = height
         self.point = 1
@@ -15,27 +15,30 @@ class Fruit:
         self.recreate(snake)
 
     def show(self):
-        pygame.draw.circle(self.display, self.color, [self.x, self.y], self.r)
-        
+        if self.r == 10:
+            self.display.blit(pygame.image.load('assets/img/apple.png'), (self.x, self.y))
+        else:
+            self.display.blit(pygame.image.load('assets/img/apple_big.png'), (self.x, self.y))
+
     def recreate(self, snake):
         self.recreated += 1
 
-        if (self.recreated % 5 == 0):
-            while True:
-                self.x = random.randint(0, self.width - 20)
-                if snake.x != self.x: break
-            while True:
-                self.y = random.randint(0, self.height - 20)
-                if snake.y != self.y: break
+        while True:
+            valid_position = True
+            self.x = random.randint(0, self.width - 30)
+            self.y = random.randint(0, self.height - 30)
+            if (snake.x == self.x) and (snake.y == self.y):
+                continue
+            for i in range(len(snake.body)):
+                if (snake.body[i].x == self.x) and (snake.body[i].y == self.y):
+                    valid_position = False
+                    break
+            if valid_position:
+                break
+
+        if self.recreated % 5 == 0:
             self.point = 3
             self.r = 20
-        else: 
-            while True:
-                self.x = random.randint(0, self.width - 10)
-                if snake.x != self.x: break
-            while True:
-                self.y = random.randint(0, self.height - 10)
-                if snake.y != self.y: break
+        else:
             self.point = 1
             self.r = 10
-
