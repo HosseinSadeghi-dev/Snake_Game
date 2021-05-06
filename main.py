@@ -11,7 +11,7 @@ class Game:
         self.height = 500
         pygame.init()
         # self.font = pygame.font.Font(pygame.font.match_font('Atlantic Cruise'), 14)
-        self.font = pygame.font.Font('assets/fonts/Atlantic_Cruise.ttf', 14)
+        self.font = pygame.font.Font('assets/fonts/arial.ttf', 14)
 
         self.window = pygame.display.set_mode((self.width, self.height))
         self.clock = pygame.time.Clock()
@@ -36,7 +36,7 @@ class Game:
                     elif (event.key == pygame.K_s or event.key == pygame.K_DOWN) and self.snake.y_change != 1:
                         self.snake.y_change = -1
                         self.snake.x_change = 0
-                    elif event.key == pygame.K_ESCAPE:
+                    elif event.key == pygame.QUIT:
                         exit()
 
             self.window.fill((0, 0, 0))  # Background
@@ -62,7 +62,7 @@ class Game:
 
 def choose_difficulty(width, height, window):
     pygame.init()
-    font = pygame.font.Font('assets/fonts/Atlantic_Cruise.ttf', 40)
+    font = pygame.font.Font('assets/fonts/arial.ttf', 40)
 
     easy = font.render('1- Easy', True, (255, 255, 255))
     easy_box = easy.get_rect(center=(width / 2, height / 2 - 60))
@@ -90,7 +90,7 @@ def choose_difficulty(width, height, window):
                     return 5
                 elif event.key == pygame.K_4 or event.key == 1073741916:
                     return 8
-                elif event.key == pygame.K_ESCAPE:
+                elif event.key == pygame.QUIT:
                     exit()
 
         window.blit(easy, easy_box)
@@ -113,7 +113,7 @@ def main():
 def gameover(window, width, height, user_score):
     pygame.init()
     # font = pygame.font.Font(pygame.font.match_font('Atlantic Cruise'), 40)
-    font = pygame.font.Font('assets/fonts/Atlantic_Cruise.ttf', 40)
+    font = pygame.font.Font('assets/fonts/arial.ttf', 40)
 
     alert = font.render(f"GAMEOVER !!!", True, (255, 255, 255))
     alert_box = alert.get_rect(center=(width / 2, height / 2 - 70))
